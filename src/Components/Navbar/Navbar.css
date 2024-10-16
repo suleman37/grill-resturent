@@ -1,0 +1,18 @@
+.trans{
+    background-color: rgba(0, 0, 0, 0.281);
+    position: fixed;
+    width: 100vw;
+    z-index: 10px;
+    border-radius: 0px 0px 30px 20px;
+    box-shadow: 0 5px 5px rgba(88, 88, 88, 0.61);
+}
+
+.nav {
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.nav.scrolled {
+  background-color: rgba(2, 2, 2, 0.904);
+  box-shadow: 0 5px 15px rgba(88, 88, 88, 0.61);
+  z-index: 1000;
+}

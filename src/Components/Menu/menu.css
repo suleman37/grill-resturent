@@ -1,0 +1,8 @@
+.menu-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+    url(../../images/flat-lay-mexican-food-composition-with-copyspace.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 50px 150px;
+}

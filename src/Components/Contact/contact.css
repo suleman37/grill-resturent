@@ -1,0 +1,9 @@
+.contact-bg{
+    background: url(../../images/dried-twigs-near-vintage-stuff.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    color: white;
+    padding: 100px;
+}  

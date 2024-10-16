@@ -1,0 +1,32 @@
+.bg {
+  background: url(../../images//hero-slider-1.jpg);
+  height: 105vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+#seperator {
+  margin-top: -10px;
+  background-position: center;
+}
+
+#main-2-head {
+  font-size: 65px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#main-head {
+  letter-spacing: 4px;
+}
+#btn2 {
+  color: rgba(214, 177, 10, 0.774);
+  background-color: transparent;
+  border: 2px solid rgba(214, 177, 10, 0.774);
+  padding: 10px 15px;
+  border-radius: 2px;
+}

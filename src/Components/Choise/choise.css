@@ -1,0 +1,10 @@
+/* src/components/slider.css */
+
+.slick-slide {
+    margin: 0 10px; /* Adjust margin as needed */
+  }
+  
+  .slick-list {
+    margin: 0 -10px; /* Same value as half the slide margin */
+  }
+  
