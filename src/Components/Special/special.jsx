@@ -18,10 +18,10 @@ const Special = () => {
     <>
       <div className="container-fluid special">
         <div className="row">
-          <div className="col">
+          <div className="col-12 col-md-6">
             <img src={pic} alt="Special Dish" className="special" />
           </div>
-          <div className="col right">
+          <div className="col-12 right col-md-6">
             <p id="main-head">
               <small>SPECIAL DISH</small>
             </p>

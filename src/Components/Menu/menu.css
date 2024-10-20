@@ -4,5 +4,10 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 50px 150px;
+  /* padding: 50px 150px; */
+}
+@media (max-width: 768px) {
+  .menu-bg {
+    padding: 50px 20px;
+  }
 }
