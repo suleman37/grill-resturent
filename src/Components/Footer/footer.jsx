@@ -76,10 +76,6 @@ const Footer = () => {
             Our purpose is to make the pleasure and benefits of sports
             accessible to everyone.
           </PurposeText>
-          <Typography variant="body2" color="#cccccc">
-            &copy; {new Date().getFullYear()} Your Company Name. All Rights
-            Reserved.
-          </Typography>
         </Grid>
         <Grid item xs={12} md={4}>
           <FooterTitle variant="h6">Follow Us On</FooterTitle>
@@ -106,8 +102,9 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" color="#cccccc">
-          Expertly crafted by Muhammad Suleman Shakeel
-        </Typography>
+            &copy; {new Date().getFullYear()} Muhammad Suleman Shakeel. All Rights
+            Reserved.
+          </Typography>
       </Box>
     </FooterContainer>
   );
