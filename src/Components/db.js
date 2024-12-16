@@ -13,9 +13,10 @@ import menu_12 from "../../src/images/layered-chocolate-tiramisu-cake-with-masca
 import menu_13 from "../../src/images/useful-dietary-salad-with-cottage-cheese-herbs-vegetables.jpg";
 import menu_14 from "../../src/images/glass-baking-dish-filled-with-pasta-meat-sauce-melted-mozzarella-cheese.jpg";
 import menu_15 from "../../src/images/top-view-bean-soup-called-merci-inside-little-plate-with-greens-white-surface-soup-meal-food-vegetable-bean.jpg";
-import menu_17 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
-import menu_18 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
-import menu_19 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
+import menu_16 from "../../src/images/high-angle-delicious-cheese-tomatoes.jpg";
+import menu_17 from "../../src/images/spanich-paella.jpg";
+import menu_18 from "../../src/images/vegetarian-risotto-with-fresh-mushrooms-parmesan-cheese-generated-by-ai.jpg";
+import menu_19 from "../../src/images/big-sandwich-hamburger-with-juicy-chicken-burger-cheese-tomato-red-onion-wooden-table.jpg";
 import menu_20 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
 import menu_21 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
 import menu_22 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
@@ -27,7 +28,6 @@ import menu_27 from "../../src/images/front-view-greek-salad-lettuce-with-black-
 import menu_28 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
 import menu_29 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
 import menu_30 from "../../src/images/front-view-greek-salad-lettuce-with-black-olives.jpg";
-import menu_16 from "../../src/images/high-angle-delicious-cheese-tomatoes.jpg";
 
 export const baseDishes = [
     { 
