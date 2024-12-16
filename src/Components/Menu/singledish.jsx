@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography, Button, Grid } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Button, Grid, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Seperator from "../../images/separator.svg";
 import "./menu.css";
@@ -42,7 +42,7 @@ const SingleDish = () => {
   const relatedDishes = dishes.filter(d => d.id !== dish.id).slice(0, 3);
 
   return (
-    <div className="container-fluid fourth-bg text-light menu-bg" id="single-dish" style={{ paddingTop: "150px", paddingLeft: "100px", paddingRight: "100px", fontFamily: fontFamily }}>
+    <Container maxWidth="lg" className="fourth-bg text-light menu-bg" id="single-dish" style={{ paddingTop: "150px", fontFamily: fontFamily }}>
       <div className="row">
         <div className="col text-center">
           <p id="main-head" style={{ fontFamily: fontFamily }}><small>ORDER YOUR FAVORITE DISH</small></p>
@@ -74,7 +74,7 @@ const SingleDish = () => {
               <Typography variant="h6" component="div" fontWeight="bold" style={{ fontFamily: fontFamily }}>
                 {dish.price}
               </Typography>
-              <Button variant="contained" color="rgba(214, 177, 10, 0.774)" style={{ marginTop: "20px", background: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
+              <Button variant="contained" style={{ marginTop: "20px", background: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
                 Order Now
               </Button>
             </CardContent>
@@ -165,7 +165,7 @@ const SingleDish = () => {
           </Grid>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -12,11 +12,14 @@ const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: "5px",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
   transition: "transform 0.3s, box-shadow 0.3s",
-  height: "250px",
+  height: "300px", // Increased height
   "&:hover": {
     transform: "translateY(-5px)",
     boxShadow: "0 8px 40px rgba(0, 0, 0, 0.3)",
     cursor: "pointer",
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: "250px", // Increased height for small screens
   },
 }));
 
@@ -45,7 +48,7 @@ const Menu = () => {
   };
 
   return (
-    <div className="container-fluid fourth-bg text-light menu-bg" id="menu" style={{ paddingTop: "150px", paddingLeft: "100px", paddingRight: "100px" }}>
+    <div className="container-fluid fourth-bg text-light menu-bg" id="menu" style={{ paddingTop: "150px", paddingLeft: "5%", paddingRight: "5%" }}>
       <div className="row">
         <div className="col text-center">
           <p id="main-head"><small>EXQUISITE CUISINE</small></p>
@@ -53,18 +56,18 @@ const Menu = () => {
           <p id="main-2-head">Our Full Menu</p>
         </div>
       </div>
-      <Grid container spacing={4} justifyContent="center">
+      <Grid container spacing={2} justifyContent="center">
         {dishes.slice((page - 1) * dishesPerPage, page * dishesPerPage).map((dish, index) => (
           <Grid item xs={12} sm={6} md={4} key={dish.name}>
             <StyledCard onClick={() => handleCardClick(dish.id)}>
               <CardMedia
                 component="img"
                 alt={dish.name}
-                height="160"
+                height="200" // Increased height
                 image={dish.image}
                 style={{ borderRadius: "1px 1px 0 0" }}
               />
-               <CardContent sx={{ padding: "16px", textAlign: "center", backgroundColor: "#333" }}>
+              <CardContent sx={{ padding: "16px", textAlign: "center", backgroundColor: "#333" }}>
                 <Typography variant="h5" component="div" fontWeight="bold" style={{ color: "rgba(214, 177, 10, 0.774)", marginBottom: "8px" }}>
                   {dish.name}
                 </Typography>
