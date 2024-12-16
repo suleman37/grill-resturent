@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./special.css";
 import pic from "../../images/special-dish-banner.jpg";
 import Seperator from "../../images/separator.svg";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
 const Special = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -48,24 +50,31 @@ const Special = () => {
         </div>
       </div>
 
-      {isModalOpen && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2>
-              <b>Lobster Tortellini</b>
-            </h2>
-            <p>
-              Lobster Tortellini features tender pasta filled with fresh lobster
-              meat, complemented by a rich, creamy sauce. This luxurious dish is
-              a celebration of coastal flavors, often enjoyed at special
-              occasions for its elegance and depth of taste.
-            </p>
-            <button onClick={closeModal} id="btn2">
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+      <Modal show={isModalOpen} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title style={{color : "rgba(214, 177, 10, 0.774)"}}>Lobster Tortellini</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ textAlign: "start" }}>
+          Lobster Tortellini features tender pasta filled with fresh lobster
+          meat, complemented by a rich, creamy sauce. This luxurious dish is a
+          celebration of coastal flavors, often enjoyed at special occasions for
+          its elegance and depth of taste.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            onClick={closeModal}
+            style={{
+              backgroundColor: "transparent",
+              color: "rgba(214, 177, 10, 0.774)",
+              border: "1px solid rgba(214, 177, 10, 0.774)",
+              outline: "none",
+              boxShadow: "none"
+            }}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
