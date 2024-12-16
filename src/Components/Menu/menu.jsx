@@ -6,38 +6,36 @@ import Seperator from "../../images/separator.svg";
 import "./menu.css";
 import { baseDishes as dishes } from "../db.js";
 
-const StyledCard = styled(Card)(({ theme }) => ({
+const StyledCard = styled(Card)({
   backgroundColor: "#424242",
   color: "#fff",
   borderRadius: "5px",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
   transition: "transform 0.3s, box-shadow 0.3s",
   height: "250px",
+  cursor: "pointer",
   "&:hover": {
     transform: "translateY(-5px)",
     boxShadow: "0 8px 40px rgba(0, 0, 0, 0.3)",
   },
-  cursor: "pointer",
-}));
+});
 
 const Menu = () => {
   const navigate = useNavigate();
 
-  const handleCardClick = (dishId) => {
-    navigate(`/menu/${dishId}`);
-  };
+  const handleCardClick = (dishId) => navigate(`/menu/${dishId}`);
 
   return (
     <div className="container-fluid fourth-bg text-light menu-bg" id="menu" style={{ paddingTop: "80px" }}>
       <div className="row">
         <div className="col text-center">
           <p id="main-head"><small>SPECIAL SELECTION</small></p>
-          <img src={Seperator} alt="" id="seperator" width="100px" />
+          <img src={Seperator} alt="Separator" id="seperator" width="100px" />
           <p id="main-2-head">Delicious Menu</p>
         </div>
       </div>
       <Grid container spacing={4} justifyContent="center">
-        {dishes.slice(0, 6).map((dish, index) => (
+        {dishes.slice(0, 6).map((dish) => (
           <Grid item xs={12} sm={6} md={4} key={dish.name}>
             <StyledCard onClick={() => handleCardClick(dish.id)}>
               <CardMedia
@@ -57,18 +55,20 @@ const Menu = () => {
                 <Typography variant="h6" component="div" fontWeight="bold" style={{ color: "rgba(214, 177, 10, 0.774)", marginBottom: "8px" }}>
                   {dish.price}
                 </Typography>
-                <button style={{
-                  background: "rgba(214, 177, 10, 0.774)",
-                  border: "none",
-                  color: "black",
-                  padding: "8px 16px",
-                  borderRadius: "20px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  transition: "background 0.3s",
-                }}
-                onMouseOver={(e) => e.currentTarget.style.background = "#FFD700"}
-                onMouseOut={(e) => e.currentTarget.style.background = "rgba(214, 177, 10, 0.774)"}>
+                <button
+                  style={{
+                    background: "rgba(214, 177, 10, 0.774)",
+                    border: "none",
+                    color: "black",
+                    padding: "8px 16px",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                    fontWeight: "bold",
+                    transition: "background 0.3s",
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.background = "#FFD700")}
+                  onMouseOut={(e) => (e.currentTarget.style.background = "rgba(214, 177, 10, 0.774)")}
+                >
                   Order Now
                 </button>
               </CardContent>
@@ -78,7 +78,7 @@ const Menu = () => {
       </Grid>
       <div className="col text-center mt-3" style={{ paddingBottom: "20px" }}>
         <p>During Winter Daily From <span>7:00AM</span> to <span>10:00PM</span></p>
-        <button type="button" id="btn2" onClick={() => window.location.href = "/menu"}>
+        <button type="button" id="btn2" onClick={() => (window.location.href = "/menu")}>
           <small>View All Menu</small>
         </button>
       </div>

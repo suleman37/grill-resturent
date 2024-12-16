@@ -12,7 +12,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   borderRadius: "5px",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
   transition: "transform 0.3s, box-shadow 0.3s",
-  height: "300px", // Increased height
+  height: "300px",
   "&:hover": {
     transform: "translateY(-5px)",
     boxShadow: "0 8px 40px rgba(0, 0, 0, 0.3)",
@@ -23,7 +23,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
   },
 }));
 
-const StyledPagination = styled(Pagination)(({ theme }) => ({
+const StyledPagination = styled(Pagination)({
   "& .MuiPaginationItem-root": {
     color: "#fff",
     "&.Mui-selected": {
@@ -31,7 +31,7 @@ const StyledPagination = styled(Pagination)(({ theme }) => ({
       color: "#000",
     },
   },
-}));
+});
 
 const Menu = () => {
   const [page, setPage] = useState(1);
@@ -39,31 +39,26 @@ const Menu = () => {
   const pageCount = Math.ceil(dishes.length / dishesPerPage);
   const navigate = useNavigate();
 
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
-
-  const handleCardClick = (dishId) => {
-    navigate(`/menu/${dishId}`);
-  };
+  const handlePageChange = (_, value) => setPage(value);
+  const handleCardClick = (dishId) => navigate(`/menu/${dishId}`);
 
   return (
     <div className="container-fluid fourth-bg text-light menu-bg" id="menu" style={{ paddingTop: "150px", paddingLeft: "5%", paddingRight: "5%" }}>
       <div className="row">
         <div className="col text-center">
           <p id="main-head"><small>EXQUISITE CUISINE</small></p>
-          <img src={Seperator} alt="" id="seperator" width="100px" />
+          <img src={Seperator} alt="Separator" id="seperator" width="100px" />
           <p id="main-2-head">Our Full Menu</p>
         </div>
       </div>
       <Grid container spacing={2} justifyContent="center">
-        {dishes.slice((page - 1) * dishesPerPage, page * dishesPerPage).map((dish, index) => (
+        {dishes.slice((page - 1) * dishesPerPage, page * dishesPerPage).map((dish) => (
           <Grid item xs={12} sm={6} md={4} key={dish.name}>
             <StyledCard onClick={() => handleCardClick(dish.id)}>
               <CardMedia
                 component="img"
                 alt={dish.name}
-                height="200" // Increased height
+                height="200"
                 image={dish.image}
                 style={{ borderRadius: "1px 1px 0 0" }}
               />

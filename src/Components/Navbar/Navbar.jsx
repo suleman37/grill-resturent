@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Offcanvas from "react-bootstrap/Offcanvas";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Container, Nav, Navbar, Offcanvas, Modal, Button, Form } from "react-bootstrap";
 import Logo from "../../images/logo.svg";
 import "./Navbar.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -17,57 +11,58 @@ function CollapsibleExample() {
   const [showOffcanvas, setShowOffcanvas] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
     toast.success("Reservation submitted successfully!");
     handleCloseModal();
   };
+  const handleToggleOffcanvas = () => setShowOffcanvas(prev => !prev);
 
-  const handleToggleOffcanvas = () => {
-    setShowOffcanvas((prevShowOffcanvas) => !prevShowOffcanvas);
-  };
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "#about", label: "About Us" },
+    { href: "/menu", label: "Our Menu" },
+    { href: "#whychooseus", label: "Why Choose Us" },
+    { href: "/contact", label: "Contact Us" }
+  ];
+
+  const renderNavLinks = (onClick) =>
+    navLinks.map(({ href, label }) => (
+      <Nav.Link
+        key={label}
+        href={href}
+        onClick={onClick}
+        style={{
+          color: "rgba(214, 177, 10, 0.774)",
+          fontSize: "1.2rem",
+          transition: "color 0.3s",
+          textShadow: "1px 1px 2px #000"
+        }}
+        onMouseOver={(e) => (e.currentTarget.style.color = "#FFF")}
+        onMouseOut={(e) => (e.currentTarget.style.color = "rgba(214, 177, 10, 0.774)")}
+      >
+        {label}
+      </Nav.Link>
+    ));
 
   return (
     <>
-      {/* Navbar */}
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        className={`bg-body-tertiary trans nav ${scrolled ? "scrolled" : ""}`}
-      >
+      <Navbar collapseOnSelect expand="lg" className={`bg-body-tertiary trans nav ${scrolled ? "scrolled" : ""}`}>
         <Container className="nav">
           <Navbar.Brand href="#home">
-            <img src={Logo} alt="" />
+            <img src={Logo} alt="Logo" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleToggleOffcanvas} style={{ borderColor: "#333", borderWidth: "3px" }} />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link href="/" style={{ color: "white" }} className="navlink">
-                Home
-              </Nav.Link>
-              <Nav.Link href="#about" style={{ color: "white" }}>
-                About Us
-              </Nav.Link>
-              <Nav.Link href="/menu" style={{ color: "white" }}>
-                Our Menu
-              </Nav.Link>
-              <Nav.Link href="#whychooseus" style={{ color: "white" }}>
-                Why Choose Us
-              </Nav.Link>
-              <Nav.Link href="/contact" style={{ color: "white" }}>
-                Contact Us
-              </Nav.Link>
+              {renderNavLinks()}
             </Nav>
             <Nav>
               <button
@@ -88,107 +83,15 @@ function CollapsibleExample() {
         </Container>
       </Navbar>
 
-      {/* Offcanvas for small screens */}
-      <Offcanvas 
-        show={showOffcanvas} 
-        onHide={handleToggleOffcanvas} 
-        placement="end" 
-        style={{ 
-          backgroundColor: "#222", 
-          color: "#fff", 
-          boxShadow: "0 0 15px rgba(0, 0, 0, 0.5)", 
-          borderRadius: "10px"
-        }}
-      >
-        <Offcanvas.Header 
-          closeButton 
-          style={{ 
-            borderBottom: "2px solid #555", 
-            padding: "15px"
-          }}
-        >
-          <Offcanvas.Title 
-            style={{ 
-              color: "rgba(214, 177, 10, 0.774)", 
-              fontFamily: "'Cursive', sans-serif", 
-              fontSize: "1.5rem"
-            }}
-          >
-            <img src={Logo} alt="" />
+      <Offcanvas show={showOffcanvas} onHide={handleToggleOffcanvas} placement="end" style={{ backgroundColor: "#222", color: "#fff", boxShadow: "0 0 15px rgba(0, 0, 0, 0.5)", borderRadius: "10px" }}>
+        <Offcanvas.Header closeButton style={{ borderBottom: "2px solid #555", padding: "15px" }}>
+          <Offcanvas.Title style={{ color: "rgba(214, 177, 10, 0.774)", fontFamily: "'Cursive', sans-serif", fontSize: "1.5rem" }}>
+            <img src={Logo} alt="Logo" />
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Nav className="flex-column" style={{ gap: "10px" }}>
-            <Nav.Link 
-              href="/" 
-              onClick={handleToggleOffcanvas} 
-              style={{ 
-                color: "rgba(214, 177, 10, 0.774)", 
-                fontSize: "1.2rem", 
-                transition: "color 0.3s", 
-                textShadow: "1px 1px 2px #000"
-              }}
-              onMouseOver={(e) => e.currentTarget.style.color = "#FFF"}
-              onMouseOut={(e) => e.currentTarget.style.color = "rgba(214, 177, 10, 0.774)"}
-            >
-              Home
-            </Nav.Link>
-            <Nav.Link 
-              href="#about" 
-              onClick={handleToggleOffcanvas} 
-              style={{ 
-                color: "rgba(214, 177, 10, 0.774)", 
-                fontSize: "1.2rem", 
-                transition: "color 0.3s", 
-                textShadow: "1px 1px 2px #000"
-              }}
-              onMouseOver={(e) => e.currentTarget.style.color = "#FFF"}
-              onMouseOut={(e) => e.currentTarget.style.color = "rgba(214, 177, 10, 0.774)"}
-            >
-              About Us
-            </Nav.Link>
-            <Nav.Link 
-              href="/menu" 
-              onClick={handleToggleOffcanvas} 
-              style={{ 
-                color: "rgba(214, 177, 10, 0.774)", 
-                fontSize: "1.2rem", 
-                transition: "color 0.3s", 
-                textShadow: "1px 1px 2px #000"
-              }}
-              onMouseOver={(e) => e.currentTarget.style.color = "#FFF"}
-              onMouseOut={(e) => e.currentTarget.style.color = "rgba(214, 177, 10, 0.774)"}
-            >
-              Our Menu
-            </Nav.Link>
-            <Nav.Link 
-              href="#whychooseus" 
-              onClick={handleToggleOffcanvas} 
-              style={{ 
-                color: "rgba(214, 177, 10, 0.774)", 
-                fontSize: "1.2rem", 
-                transition: "color 0.3s", 
-                textShadow: "1px 1px 2px #000"
-              }}
-              onMouseOver={(e) => e.currentTarget.style.color = "#FFF"}
-              onMouseOut={(e) => e.currentTarget.style.color = "rgba(214, 177, 10, 0.774)"}
-            >
-              Why Choose Us
-            </Nav.Link>
-            <Nav.Link 
-              href="#pricing" 
-              onClick={handleToggleOffcanvas} 
-              style={{ 
-                color: "rgba(214, 177, 10, 0.774)", 
-                fontSize: "1.2rem", 
-                transition: "color 0.3s", 
-                textShadow: "1px 1px 2px #000"
-              }}
-              onMouseOver={(e) => e.currentTarget.style.color = "#FFF"}
-              onMouseOut={(e) => e.currentTarget.style.color = "rgba(214, 177, 10, 0.774)"}
-            >
-              Contact Us
-            </Nav.Link>
+            {renderNavLinks(handleToggleOffcanvas)}
           </Nav>
           <div style={{ marginTop: "20px", textAlign: "center" }}>
             <button
@@ -203,8 +106,8 @@ function CollapsibleExample() {
                 transition: "background 0.3s",
                 boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"
               }}
-              onMouseOver={(e) => e.currentTarget.style.background = "#FFD700"}
-              onMouseOut={(e) => e.currentTarget.style.background = "rgba(214, 177, 10, 0.774)"}
+              onMouseOver={(e) => (e.currentTarget.style.background = "#FFD700")}
+              onMouseOut={(e) => (e.currentTarget.style.background = "rgba(214, 177, 10, 0.774)")}
               onClick={handleShowModal}
             >
               Reserve Table
@@ -213,37 +116,24 @@ function CollapsibleExample() {
         </Offcanvas.Body>
       </Offcanvas>
 
-      {/* Modal for table booking */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton style={{ color: "rgba(214, 177, 10, 0.774)" }}>
           <Modal.Title style={{ color: "rgba(214, 177, 10, 0.774)" }}>Reserve a Table</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleFormSubmit}>
-            <Form.Group controlId="formName">
-              <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter your name" required />
-            </Form.Group>
-            <Form.Group controlId="formEmail">
-              <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter your email" required />
-            </Form.Group>
-            <Form.Group controlId="formPhone">
-              <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Phone Number</Form.Label>
-              <Form.Control type="tel" placeholder="Enter your phone number" required />
-            </Form.Group>
-            <Form.Group controlId="formDate">
-              <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Date</Form.Label>
-              <Form.Control type="date" required />
-            </Form.Group>
-            <Form.Group controlId="formTime">
-              <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Time</Form.Label>
-              <Form.Control type="time" required />
-            </Form.Group>
-            <Form.Group controlId="formGuests">
-              <Form.Label style={{ textAlign: "end", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Number of Guests</Form.Label>
-              <Form.Control type="number" min="1" placeholder="Enter number of guests" required />
-            </Form.Group>
+            {["Name", "Email address", "Phone Number", "Date", "Time", "Number of Guests"].map((label, index) => (
+              <Form.Group key={index} controlId={`form${label.replace(" ", "")}`}>
+                <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>{label}</Form.Label>
+                <Form.Control
+                  type={label === "Email address" ? "email" : label === "Phone Number" ? "tel" : label === "Date" ? "date" : label === "Time" ? "time" : label === "Number of Guests" ? "number" : "text"}
+                  placeholder={label === "Number of Guests" ? "Enter number of guests" : `Enter your ${label.toLowerCase()}`}
+                  required
+                  min={label === "Number of Guests" ? "1" : undefined}
+                  style={{ backgroundColor: "#333", color: "#fff", border: "1px solid rgba(214, 177, 10, 0.774)" }}
+                />
+              </Form.Group>
+            ))}
             <Modal.Footer>
               <Button variant="secondary" onClick={handleCloseModal} style={{ background: "transparent", border: "1px solid rgba(214, 177, 10, 0.774)" }}>
                 Close
