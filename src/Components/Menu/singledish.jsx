@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 import Seperator from "../../images/separator.svg";
 import "./menu.css";
 import { baseDishes as dishes } from "../db.js";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Jane from "../../images/jane.jpeg";
 import alex from "../../images/Alex-Johnson.png";
 import John from "../../images/John.jpeg";
@@ -37,6 +37,7 @@ const ReviewCard = styled(Card)(({ theme }) => ({
 
 const SingleDish = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dish = dishes.find(d => d.id === parseInt(id));
 
   if (!dish) {
@@ -44,6 +45,10 @@ const SingleDish = () => {
   }
 
   const relatedDishes = dishes.filter(d => d.id !== dish.id).slice(0, 3);
+
+  const handleOrderClick = () => {
+    navigate(`/checkout/${id}`);
+  };
 
   return (
     <div className="container-fluid fourth-bg text-light menu-bg" id="single-dish" style={{ paddingTop: "150px", paddingLeft: "100px", paddingRight: "100px", fontFamily: fontFamily }}>
@@ -78,7 +83,11 @@ const SingleDish = () => {
               <Typography variant="h6" component="div" fontWeight="bold" style={{ fontFamily: fontFamily }}>
                 {dish.price}
               </Typography>
-              <Button variant="contained" color="rgba(214, 177, 10, 0.774)" style={{ marginTop: "20px", background: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
+              <Button 
+                variant="contained" 
+                style={{ marginTop: "20px", background: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}
+                onClick={handleOrderClick}
+              >
                 Order Now
               </Button>
             </CardContent>
