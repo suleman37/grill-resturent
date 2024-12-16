@@ -8,10 +8,10 @@ import {
   Typography,
   Card,
   CardContent,
-  Snackbar,
-  SnackbarContent,
 } from '@mui/material';
 import { styled } from '@mui/system';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Styled components for input and button
 const StyledTextField = styled(TextField)({
@@ -73,16 +73,10 @@ const SubscribeForm = ({ onSuccess }) => {
 };
 
 const Contact = () => {
-  const [toastOpen, setToastOpen] = useState(false);
-
-  const handleToastClose = () => {
-    setToastOpen(false);
-  };
-
   const handleSuccess = () => {
-    setToastOpen(true);
+    toast.success("Our team will contact you within 24 hours");
   };
-
+  
   return (
     <Container fluid className="contact-bg">
       <Row>
@@ -104,18 +98,7 @@ const Contact = () => {
               <SubscribeForm onSuccess={handleSuccess} />
             </CardContent>
           </Card>
-
-          <Snackbar
-            open={toastOpen}
-            autoHideDuration={3000}
-            onClose={handleToastClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-          >
-            <SnackbarContent
-              style={{ backgroundColor: '#4caf50' }} // Green background for success
-              message="Our team will contact you within 24 hours"
-            />
-          </Snackbar>
+          <ToastContainer />
         </Col>
       </Row>
     </Container>
