@@ -16,7 +16,7 @@ function CollapsibleExample() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 100); // Change 100 to your desired scroll threshold
+      setScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -47,16 +47,16 @@ function CollapsibleExample() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mx-auto">
-              <Nav.Link href="#features" style={{ color: "white" }} className="navlink">
+              <Nav.Link href="/" style={{ color: "white" }} className="navlink">
                 Home
               </Nav.Link>
-              <Nav.Link href="#pricing" style={{ color: "white" }}>
+              <Nav.Link href="#about" style={{ color: "white" }}>
                 About Us
               </Nav.Link>
-              <Nav.Link href="#pricing" style={{ color: "white" }}>
+              <Nav.Link href="/menu" style={{ color: "white" }}>
                 Our Menu
               </Nav.Link>
-              <Nav.Link href="#pricing" style={{ color: "white" }}>
+              <Nav.Link href="#whychooseus" style={{ color: "white" }}>
                 Why Choose Us
               </Nav.Link>
               <Nav.Link href="#pricing" style={{ color: "white" }}>

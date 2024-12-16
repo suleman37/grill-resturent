@@ -1,24 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import menu_1 from "../../images/front-view-greek-salad-lettuce-with-black-olives.jpg";
-import menu_2 from "../../images/pumpkin-soup-rustic-wooden-bowl-generated-by-ai.jpg";
-import menu_3 from "../../images/wooden-tray-with-olives-grapes-wine-glasses.jpg";
-import menu_4 from "../../images/penne-pasta-tomato-sauce-with-chicken-tomatoes-wooden-table.jpg";
-import menu_5 from "../../images/grilled-salmon-fillet-with-asparagus-broccoli-generated-by-ai.jpg";
-import menu_6 from "../../images/fresh-slice-homemade-chocolate-cake-plate-generated-by-artificial-intelligence.jpg";
 import Seperator from "../../images/separator.svg";
 import "./menu.css";
-
-const dishes = [
-  { name: "Greek Salad", price: "$25.50", description: "A fresh and healthy Greek salad.", image: menu_1 },
-  { name: "Butternut Pumpkin", price: "$10.50", description: "Creamy butternut pumpkin dish.", image: menu_2 },
-  { name: "Olivas Rellenas", price: "$15.50", description: "Stuffed olives with various fillings.", image: menu_3 },
-  { name: "Pasta Primavera", price: "$50.50", description: "Colorful pasta with seasonal vegetables.", image: menu_4 },
-  { name: "Grilled Salmon", price: "$65.50", description: "Delicious grilled salmon with herbs.", image: menu_5 },
-  { name: "Chocolate Lava Cake", price: "$45.50", description: "Decadent dessert with a molten center.", image: menu_6 },
-  // Add more dishes here...
-];
+import { baseDishes as dishes } from "../db.js";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: "#424242",
@@ -34,16 +19,8 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 const Menu = () => {
-  const [change, setChange] = useState(6);
-
-  const loadMore = () => {
-    if (change < dishes.length) {
-      setChange((prev) => Math.min(prev + 3, dishes.length)); // Load 3 more dishes
-    }
-  };
-
   return (
-    <div className="container-fluid fourth-bg text-light menu-bg" id="menu">
+    <div className="container-fluid fourth-bg text-light menu-bg" id="menu" style={{ paddingTop: "80px" }}>
       <div className="row">
         <div className="col text-center">
           <p id="main-head"><small>SPECIAL SELECTION</small></p>
@@ -52,8 +29,8 @@ const Menu = () => {
         </div>
       </div>
       <Grid container spacing={4} justifyContent="center">
-        {dishes.slice(0, change).map((dish, index) => (
-          <Grid item xs={12} sm={6} md={4} key={dish.name}> {/* Use dish name as key */}
+        {dishes.slice(0, 6).map((dish, index) => (
+          <Grid item xs={12} sm={6} md={4} key={dish.name}>
             <StyledCard>
               <CardMedia
                 component="img"
@@ -62,16 +39,30 @@ const Menu = () => {
                 image={dish.image}
                 style={{ borderRadius: "1px 1px 0 0" }}
               />
-              <CardContent sx={{ padding: "8px" }}>
-                <Typography variant="h6" component="div" fontWeight="bold">
+              <CardContent sx={{ padding: "16px", textAlign: "center", backgroundColor: "#333" }}>
+                <Typography variant="h5" component="div" fontWeight="bold" style={{ color: "rgba(214, 177, 10, 0.774)", marginBottom: "8px" }}>
                   {dish.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" style={{ color: "#B0B0B0", fontStyle: "italic", marginBottom: "12px" }}>
                   {dish.description}
                 </Typography>
-                <Typography variant="h6" component="div" fontWeight="bold">
+                <Typography variant="h6" component="div" fontWeight="bold" style={{ color: "rgba(214, 177, 10, 0.774)", marginBottom: "8px" }}>
                   {dish.price}
                 </Typography>
+                <button style={{
+                  background: "rgba(214, 177, 10, 0.774)",
+                  border: "none",
+                  color: "black",
+                  padding: "8px 16px",
+                  borderRadius: "20px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  transition: "background 0.3s",
+                }}
+                onMouseOver={(e) => e.currentTarget.style.background = "#FFD700"}
+                onMouseOut={(e) => e.currentTarget.style.background = "rgba(214, 177, 10, 0.774)"}>
+                  Order Now
+                </button>
               </CardContent>
             </StyledCard>
           </Grid>
@@ -79,7 +70,7 @@ const Menu = () => {
       </Grid>
       <div className="col text-center mt-3" style={{ paddingBottom: "20px" }}>
         <p>During Winter Daily From <span>7:00AM</span> to <span>10:00PM</span></p>
-        <button type="button" id="btn2" onClick={loadMore}>
+        <button type="button" id="btn2" onClick={() => window.location.href = "/menu"}>
           <small>View All Menu</small>
         </button>
       </div>

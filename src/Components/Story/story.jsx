@@ -13,7 +13,7 @@ const Story = () => {
   };
 
   return (
-    <div className="story-container">
+    <div className="story-container" id='about'>
       <motion.div 
         className="story-content"
         initial="hidden" 

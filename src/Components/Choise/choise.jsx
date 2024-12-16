@@ -5,7 +5,6 @@ import CozyAtmosphereImg from "../../images/breakfast-wooden-table-with-natural-
 import Chefs from "../../images/portrait-chefs-team-acting-funny-with-knives-restaurant-kitchen-making-joke-about-professional-cuisine-service-cheerful-man-woman-working-gourmet-meal-dish-with-culinary-recipe.jpg"; // Your imported image
 import Seperator from "../../images/separator.svg";
 
-
 const WhyChooseUs = () => {
   const reasons = [
     {
@@ -27,7 +26,7 @@ const WhyChooseUs = () => {
 
   return (
     <Box sx={{ padding: 6, backgroundColor: '#333', color: '#fff' }}>
-      <div className="row">
+      <div className="row" id='whychooseus'>
         <div className="col text-center">
           <p id="main-head">
             <small>WHY CHOOSE US</small>
@@ -44,6 +43,9 @@ const WhyChooseUs = () => {
                 backgroundColor: '#444',
                 color: '#fff',
                 transition: '0.3s', 
+                height: '100%', // Ensures all cards have the same height
+                display: 'flex',
+                flexDirection: 'column',
                 '&:hover': { 
                   transform: 'scale(1.05)', 
                   boxShadow: 10 
@@ -59,7 +61,7 @@ const WhyChooseUs = () => {
                   objectFit: 'cover' 
                 }} 
               />
-              <CardContent sx={{ textAlign: 'center'}}>
+              <CardContent sx={{ textAlign: 'center', flexGrow: 1 }}>
                 <Typography variant="h6">{reason.title}</Typography>
                 <Typography variant="body2">{reason.description}</Typography>
               </CardContent>
