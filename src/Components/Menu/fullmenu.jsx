@@ -19,7 +19,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
     cursor: "pointer",
   },
   [theme.breakpoints.down('sm')]: {
-    height: "250px", // Increased height for small screens
+    height: "250px",
   },
 }));
 
@@ -74,23 +74,6 @@ const Menu = () => {
                 <Typography variant="body2" style={{ color: "#B0B0B0", fontStyle: "italic", marginBottom: "12px" }}>
                   {dish.description}
                 </Typography>
-                <Typography variant="h6" component="div" fontWeight="bold" style={{ color: "rgba(214, 177, 10, 0.774)", marginBottom: "8px" }}>
-                  {dish.price}
-                </Typography>
-                <button style={{
-                  background: "rgba(214, 177, 10, 0.774)",
-                  border: "none",
-                  color: "black",
-                  padding: "8px 16px",
-                  borderRadius: "20px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  transition: "background 0.3s",
-                }}
-                onMouseOver={(e) => e.currentTarget.style.background = "#FFD700"}
-                onMouseOut={(e) => e.currentTarget.style.background = "rgba(214, 177, 10, 0.774)"}>
-                  Order Now
-                </button>
               </CardContent>
             </StyledCard>
           </Grid>

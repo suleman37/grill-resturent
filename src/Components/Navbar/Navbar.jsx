@@ -65,7 +65,7 @@ function CollapsibleExample() {
               <Nav.Link href="#whychooseus" style={{ color: "white" }}>
                 Why Choose Us
               </Nav.Link>
-              <Nav.Link href="#pricing" style={{ color: "white" }}>
+              <Nav.Link href="/contact" style={{ color: "white" }}>
                 Contact Us
               </Nav.Link>
             </Nav>
@@ -213,47 +213,47 @@ function CollapsibleExample() {
         </Offcanvas.Body>
       </Offcanvas>
 
-      {/* Modal */}
+      {/* Modal for table booking */}
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton style={{ color: "rgba(214, 177, 10, 0.774)" }}>
           <Modal.Title style={{ color: "rgba(214, 177, 10, 0.774)" }}>Reserve a Table</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="formName">
               <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter your name" />
+              <Form.Control type="text" placeholder="Enter your name" required />
             </Form.Group>
             <Form.Group controlId="formEmail">
               <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter your email" />
+              <Form.Control type="email" placeholder="Enter your email" required />
             </Form.Group>
             <Form.Group controlId="formPhone">
               <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Phone Number</Form.Label>
-              <Form.Control type="tel" placeholder="Enter your phone number" />
+              <Form.Control type="tel" placeholder="Enter your phone number" required />
             </Form.Group>
             <Form.Group controlId="formDate">
               <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Date</Form.Label>
-              <Form.Control type="date" />
+              <Form.Control type="date" required />
             </Form.Group>
             <Form.Group controlId="formTime">
               <Form.Label style={{ textAlign: "start", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Time</Form.Label>
-              <Form.Control type="time" />
+              <Form.Control type="time" required />
             </Form.Group>
             <Form.Group controlId="formGuests">
               <Form.Label style={{ textAlign: "end", display: "flex", color: "rgba(214, 177, 10, 0.774)" }}>Number of Guests</Form.Label>
-              <Form.Control type="number" min="1" placeholder="Enter number of guests" />
+              <Form.Control type="number" min="1" placeholder="Enter number of guests" required />
             </Form.Group>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleCloseModal} style={{ background: "transparent", border: "1px solid rgba(214, 177, 10, 0.774)" }}>
+                Close
+              </Button>
+              <Button type="submit" variant="primary" style={{ background: "rgba(214, 177, 10, 0.774)", border: "1px solid transparent" }}>
+                Reserve
+              </Button>
+            </Modal.Footer>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal} style={{ background: "transparent", border: "1px solid rgba(214, 177, 10, 0.774)" }}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleFormSubmit} style={{ background: "rgba(214, 177, 10, 0.774)", border: "1px solid transparent" }}>
-            Reserve
-          </Button>
-        </Modal.Footer>
       </Modal>
       <ToastContainer />
     </>

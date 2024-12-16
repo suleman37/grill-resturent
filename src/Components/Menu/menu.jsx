@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, CardMedia, CardContent, Typography, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 import Seperator from "../../images/separator.svg";
 import "./menu.css";
 import { baseDishes as dishes } from "../db.js";
@@ -16,9 +17,16 @@ const StyledCard = styled(Card)(({ theme }) => ({
     transform: "translateY(-5px)",
     boxShadow: "0 8px 40px rgba(0, 0, 0, 0.3)",
   },
+  cursor: "pointer",
 }));
 
 const Menu = () => {
+  const navigate = useNavigate();
+
+  const handleCardClick = (dishId) => {
+    navigate(`/menu/${dishId}`);
+  };
+
   return (
     <div className="container-fluid fourth-bg text-light menu-bg" id="menu" style={{ paddingTop: "80px" }}>
       <div className="row">
@@ -31,7 +39,7 @@ const Menu = () => {
       <Grid container spacing={4} justifyContent="center">
         {dishes.slice(0, 6).map((dish, index) => (
           <Grid item xs={12} sm={6} md={4} key={dish.name}>
-            <StyledCard>
+            <StyledCard onClick={() => handleCardClick(dish.id)}>
               <CardMedia
                 component="img"
                 alt={dish.name}

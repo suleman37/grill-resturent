@@ -1,11 +1,15 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography, Button, Grid, Container } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Button, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Seperator from "../../images/separator.svg";
 import "./menu.css";
 import { baseDishes as dishes } from "../db.js";
 import { useParams } from "react-router-dom";
-const fontFamily = "'Roboto', sans-serif";
+import Jane from "../../images/jane.jpeg";
+import alex from "../../images/Alex-Johnson.png";
+import John from "../../images/John.jpeg";
+
+const fontFamily = "'Roboto', sans-serif"; // Define a common font family
 
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: "transparent",
@@ -42,7 +46,7 @@ const SingleDish = () => {
   const relatedDishes = dishes.filter(d => d.id !== dish.id).slice(0, 3);
 
   return (
-    <Container maxWidth="lg" className="fourth-bg text-light menu-bg" id="single-dish" style={{ paddingTop: "150px", fontFamily: fontFamily }}>
+    <div className="container-fluid fourth-bg text-light menu-bg" id="single-dish" style={{ paddingTop: "150px", paddingLeft: "100px", paddingRight: "100px", fontFamily: fontFamily }}>
       <div className="row">
         <div className="col text-center">
           <p id="main-head" style={{ fontFamily: fontFamily }}><small>ORDER YOUR FAVORITE DISH</small></p>
@@ -74,7 +78,7 @@ const SingleDish = () => {
               <Typography variant="h6" component="div" fontWeight="bold" style={{ fontFamily: fontFamily }}>
                 {dish.price}
               </Typography>
-              <Button variant="contained" style={{ marginTop: "20px", background: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
+              <Button variant="contained" color="rgba(214, 177, 10, 0.774)" style={{ marginTop: "20px", background: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
                 Order Now
               </Button>
             </CardContent>
@@ -118,54 +122,69 @@ const SingleDish = () => {
           </Typography>
           <Grid container spacing={3} justifyContent="center">
             <Grid item xs={12} md={4}>
-              <ReviewCard>
-                <CardContent>
-                  <Typography variant="body1" color="white" style={{ fontStyle: "italic", fontSize: "1.2rem", fontFamily: fontFamily, marginBottom: "15px" }}>
-                    "Delicious and well-prepared dish. Highly recommend!"
-                  </Typography>
-                  <Typography variant="body2" style={{ textAlign: "right", color: "#FFD700", fontFamily: fontFamily, fontWeight: "bold" }}>
-                    - John Doe
-                  </Typography>
-                  <Typography variant="body2" style={{ textAlign: "right", color: "#FFD700", fontFamily: fontFamily }}>
-                    ★★★★★
-                  </Typography>
-                </CardContent>
+              <ReviewCard style={{ background: "linear-gradient(135deg, #333, #444)", padding: "20px", borderRadius: "15px", boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)", width: "100%", transition: "transform 0.3s" }}>
+                <CardMedia
+                  component="img"
+                  alt="John Doe"
+                  height="100"
+                  image={John}
+                  style={{ borderRadius: "50%", width: "100px", height: "100px", margin: "0 auto 15px", border: "2px solid rgba(214, 177, 10, 0.774)" }}
+                />
+                <Typography variant="body1" color="white" style={{ fontStyle: "italic", fontSize: "1.2rem", fontFamily: fontFamily, marginBottom: "15px" }}>
+                  "Delicious and well-prepared dish. Highly recommend!"
+                </Typography>
+                <Typography variant="body2" style={{ textAlign: "right", color: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily, marginBottom: "5px" }}>
+                  - John Doe
+                </Typography>
+                <Typography variant="body2" style={{ textAlign: "right", color: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
+                  ★★★★★
+                </Typography>
               </ReviewCard>
             </Grid>
             <Grid item xs={12} md={4}>
-              <ReviewCard>
-                <CardContent>
-                  <Typography variant="body1" color="white" style={{ fontStyle: "italic", fontSize: "1.2rem", fontFamily: fontFamily, marginBottom: "15px" }}>
-                    "A delightful experience, the flavors were amazing. Yummy!"
-                  </Typography>
-                  <Typography variant="body2" style={{ textAlign: "right", color: "#FFD700", fontFamily: fontFamily, fontWeight: "bold" }}>
-                    - Jane Smith
-                  </Typography>
-                  <Typography variant="body2" style={{ textAlign: "right", color: "#FFD700", fontFamily: fontFamily }}>
-                    ★★★★☆
-                  </Typography>
-                </CardContent>
+              <ReviewCard style={{ background: "linear-gradient(135deg, #333, #444)", padding: "20px", borderRadius: "15px", boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)", width: "100%", transition: "transform 0.3s" }}>
+                <CardMedia
+                  component="img"
+                  alt="Jane Smith"
+                  height="100"
+                  image={Jane}
+                  style={{ borderRadius: "50%", width: "100px", height: "100px", margin: "0 auto 15px", border: "2px solid rgba(214, 177, 10, 0.774)" }}
+                />
+                <Typography variant="body1" color="white" style={{ fontStyle: "italic", fontSize: "1.2rem", fontFamily: fontFamily, marginBottom: "15px" }}>
+                  "A delightful experience, the flavors were amazing. Yummy!"
+                </Typography>
+                <Typography variant="body2" style={{ textAlign: "right", color: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily, marginBottom: "5px" }}>
+                  - Jane Smith
+                </Typography>
+                <Typography variant="body2" style={{ textAlign: "right", color: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
+                  ★★★★☆
+                </Typography>
               </ReviewCard>
             </Grid>
             <Grid item xs={12} md={4}>
-              <ReviewCard>
-                <CardContent>
-                  <Typography variant="body1" color="white" style={{ fontStyle: "italic", fontSize: "1.2rem", fontFamily: fontFamily, marginBottom: "15px" }}>
-                    "A delightful experience, the flavors were absolutely amazing."
-                  </Typography>
-                  <Typography variant="body2" style={{ textAlign: "right", color: "#FFD700", fontFamily: fontFamily, fontWeight: "bold" }}>
-                    - Alex Johnson
-                  </Typography>
-                  <Typography variant="body2" style={{ textAlign: "right", color: "#FFD700", fontFamily: fontFamily }}>
-                    ★★★★☆
-                  </Typography>
-                </CardContent>
+              <ReviewCard style={{ background: "linear-gradient(135deg, #333, #444)", padding: "20px", borderRadius: "15px", boxShadow: "0 8px 30px rgba(0, 0, 0, 0.5)", width: "100%", transition: "transform 0.3s" }}>
+                <CardMedia
+                  component="img"
+                  alt="Alex Johnson"
+                  height="100"
+                  image={alex}
+                  style={{ borderRadius: "50%", width: "100px", height: "100px", margin: "0 auto 15px", border: "2px solid rgba(214, 177, 10, 0.774)" }}
+                />
+                <Typography variant="body1" color="white" style={{ fontStyle: "italic", fontSize: "1.2rem", fontFamily: fontFamily, marginBottom: "15px" }}>
+                  "A delightful experience, the flavors were absolutely amazing."
+                </Typography>
+                <Typography variant="body2" style={{ textAlign: "right", color: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily, marginBottom: "5px" }}>
+                  - Alex Johnson
+                </Typography>
+                <Typography variant="body2" style={{ textAlign: "right", color: "rgba(214, 177, 10, 0.774)", fontFamily: fontFamily }}>
+                  ★★★★☆
+                </Typography>
               </ReviewCard>
             </Grid>
           </Grid>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
