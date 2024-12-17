@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import { Box, Grid, Typography, TextField } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Box, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { PaymentElement, useStripe, useElements, Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import Seperator from "../../src/images/separator.svg";
 import Grill from "../../src/images/confident-cafe-owner-writing-register-book.jpg";
+
+const stripePromise = loadStripe("pk_test_51QWcQnIo1YrH9OGQls99RmFFyGLJyhjoaIpXbhw8GWwyYDhkJsB30wAy0dYVSLp3xZMecFMYjrUbgl18eFHsbMyJ00PuvmbW4C");
 
 const fontFamily = "'Roboto', sans-serif";
 
@@ -24,70 +27,87 @@ const StyledButton = styled('button')(() => ({
   },
 }));
 
-const StyledCardElement = styled(CardElement)({
-  marginBottom: '16px',
-  backgroundColor: '#fff',
-  borderRadius: '8px',
-  padding: '20px 12px',
-  border: '1px solid #ced4da',
-  '& .StripeElement': {
-    fontFamily: 'Arial, sans-serif',
-    fontSize: '16px',
-    color: '#32325d',
-    '::placeholder': {
-      color: '#aab7c4',
-    },
-  },
-});
-
-const Checkout = () => {
+const CheckoutForm = ({ clientSecret }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    address: '',
-    phone: '', // New input field for phone number
-  });
-  const [paymentId, setPaymentId] = useState(null); // State to store payment ID
+  const [message, setMessage] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!stripe || !elements) {
-      return; // Stripe.js has not loaded yet.
+      return;
     }
 
-    const cardElement = elements.getElement(CardElement);
+    const paymentElement = elements.getElement(PaymentElement);
+    if (!paymentElement) {
+      setMessage("Payment Element not found.");
+      return;
+    }
 
-    // Create payment method
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-      billing_details: {
-        name: formData.name,
-        email: formData.email,
-        address: {
-          line1: formData.address,
-        },
+    setIsProcessing(true);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${window.location.origin}/completion`,
       },
     });
 
     if (error) {
-      console.error('[Error]', error);
-      toast.error("Payment failed. Please try again.");
-    } else {
-      console.log('[PaymentMethod]', paymentMethod);
-      setPaymentId(paymentMethod.id); // Store payment ID
-      toast.success("Purchase completed successfully!");
-      // Send paymentMethod.id to your server for further processing
+      if (error.type === "card_error" || error.type === "validation_error") {
+        setMessage(error.message);
+      } else {
+        setMessage("An unexpected error occurred.");
+      }
     }
+
+    setIsProcessing(false);
   };
+
+  return (
+    <form id="payment-form" onSubmit={handleSubmit}>
+      <PaymentElement id="payment-element" />
+      <StyledButton type="submit" disabled={isProcessing || !stripe || !elements}>
+        <span id="button-text">
+          {isProcessing ? "Processing..." : "Pay now"}
+        </span>
+      </StyledButton>
+      {message && (
+        <Typography variant="body2" style={{ marginTop: '20px', color: '#fff' }}>
+          {message}
+        </Typography>
+      )}
+    </form>
+  );
+};
+
+const CheckoutPage = () => {
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+    // Fetch the client secret from the server
+    fetch("http://localhost:5252/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Server error: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!data.clientSecret) {
+          throw new Error("Client secret not found in response");
+        }
+        setClientSecret(data.clientSecret);
+      })
+      .catch((error) => {
+        console.error("Error fetching client secret:", error);
+      });
+  }, []);
 
   return (
     <Box sx={{ width: '100%', height: 'auto', fontFamily: fontFamily, backgroundColor: "#222", color: "#fff", padding: '100px', paddingTop: '100px' }}>
@@ -105,56 +125,16 @@ const Checkout = () => {
           <Typography variant="body1" style={{ marginBottom: "20px", color: "#fff" }}>
             Please fill out the form below to complete your purchase.
           </Typography>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Name"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              style={{ marginBottom: '16px', backgroundColor: '#fff', borderRadius: '8px' }}
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              variant="outlined"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              style={{ marginBottom: '16px', backgroundColor: '#fff', borderRadius: '8px' }}
-            />
-            <TextField
-              fullWidth
-              label="Address"
-              variant="outlined"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              style={{ marginBottom: '16px', backgroundColor: '#fff', borderRadius: '8px' }}
-            />
-            <TextField
-              fullWidth
-              label="Phone"
-              variant="outlined"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              style={{ marginBottom: '16px', backgroundColor: '#fff', borderRadius: '8px' }}
-            />
-            <StyledCardElement id="card-element" />
-            <StyledButton type="submit" disabled={!stripe}>Complete Purchase</StyledButton>
-          </form>
-          {paymentId && (
-            <Typography variant="body2" style={{ marginTop: '20px', color: '#fff' }}>
-              Payment ID: {paymentId}
-            </Typography>
+          {clientSecret && (
+            <Elements stripe={stripePromise} options={{ clientSecret }}>
+              <CheckoutForm clientSecret={clientSecret} />
+            </Elements>
           )}
+          <ToastContainer />
         </Grid>
       </Grid>
-      <ToastContainer />
     </Box>
   );
 };
 
-export default Checkout;
+export default CheckoutPage;
