@@ -16,6 +16,7 @@ import Loader from "./Components/Loader/loader";
 import Footer from "./Components/Footer/footer"; 
 import Contact from "./Components/Contact/contact";
 import Checkout from "./Components/checkout";
+import Complete from "./Components/completetion/completetion";
 
 const stripePromise = loadStripe("pk_test_51QWcQnIo1YrH9OGQls99RmFFyGLJyhjoaIpXbhw8GWwyYDhkJsB30wAy0dYVSLp3xZMecFMYjrUbgl18eFHsbMyJ00PuvmbW4C");
 
@@ -41,6 +42,7 @@ const App = () => {
         <Route path="/menu" element={<Fullmenu />} /> 
         <Route path="/menu/:id" element={<SingleDish />} /> 
         <Route path="/contact" element={<Contact />} />
+        <Route path="/complete" element={<Complete />} />
         <Route path="/checkout/:id" element={
           <Elements stripe={stripePromise}>
             <Checkout />
